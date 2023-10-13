@@ -1,22 +1,31 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+import { Navbar } from "@/components/navbar";
+
+import { SWRProvider } from "./swr-provider";
+
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
   title: {
     default: "Home",
-    template: "%s | MegaShop",
+    absolute: "%s | PokeDex",
   },
-  description: "My wonderful shop",
+  description: "My wonderful PokeDex",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={poppins.className}>
+        <SWRProvider>
+          <Navbar />
+          {children}
+        </SWRProvider>
+      </body>
     </html>
   );
 }
